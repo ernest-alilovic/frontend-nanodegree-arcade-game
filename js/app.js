@@ -1,13 +1,17 @@
 // Enemies our player must avoid
 var Enemy = function() {
+  // Determines enemy's x and y axis, speed and image
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
 };
 
+// Updates enemy's position
 Enemy.prototype.update = function(dt) {
+// Multiplies the speed by the dt parameter on the x axis
     this.x =+ this.speed * dt;
+// Ensures enemies reappear off canvas randomly at random speeds
     if (this.x > 510) {
       this.x = -50;
       this.speed = 100 + Math.floor(Math.random() * 300);
@@ -23,10 +27,12 @@ Enemy.prototype.update = function(dt) {
     }
 };
 
+// Renders enemy into game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Determines player's x and y axis and image
 var Player = function (x, y) {
     this.x = x;
     this.y = y;
@@ -37,10 +43,12 @@ Player.prototype.update = function(dt) {
 
 }
 
+// Renders player into game
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.player), this.x, this.y);
 }
 
+// Allows for use of arrow keys
 Player.prototype.handleInput = function (keyPress) {
     if (keyPress == 'left' && this.x > 0) {
       this.x -= 102;
@@ -62,7 +70,10 @@ Player.prototype.handleInput = function (keyPress) {
     }
 }
 
+// Array for all enemies
 var allEnemies = [];
+
+// Location of the 3 enemies on the y axis
 var enemyLocation = [63, 147, 230];
 
 enemyLocation.forEach(function(locationY) {
@@ -70,8 +81,10 @@ enemyLocation.forEach(function(locationY) {
   allEnemies.push(enemy);
 });
 
+// Starting location of player
 var player = new Player(202, 405);
 
+// Key press listener
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
