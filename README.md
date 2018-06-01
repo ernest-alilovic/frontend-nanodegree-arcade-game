@@ -4,7 +4,7 @@ A simple game in the style of the coin-operated favorite, Frogger.
 
 ## How To Play
 
-To start playing just click here:
+To start playing just click [here](https://ernest-alilovic.github.io/frontend-nanodegree-arcade-game/) 
 
 ## Rules
 
