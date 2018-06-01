@@ -1,6 +1,23 @@
-frontend-nanodegree-arcade-game
-===============================
+# Classic Arcade Game
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+A simple game in the style of the coin-operated favorite, Frogger.
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+## How To Play
+
+To start playing just click here:
+
+## Rules
+
+The goal is get past the cockroaches to the water.
+
+1. Use the arrow keys on your keyboard to move upwards while avoiding the cockroaches.
+
+2. If a cockroach gets you, you're placed back to the starting tile.
+
+3. If you made it in the water, you can play again!!
+
+## Built With
+
+* HTML
+* CSS
+* JavaScript
