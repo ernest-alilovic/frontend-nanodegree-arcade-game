@@ -1,10 +1,10 @@
 # Classic Arcade Game
 
-A simple game in the style of the coin-operated favorite, Frogger.
+A simple arcade game in the style of everyone's coin-operated favorite, Frogger.
 
 ## How To Play
 
-To start playing just click [here](https://ernest-alilovic.github.io/frontend-nanodegree-arcade-game/) 
+To start playing just click [here](https://ernest-alilovic.github.io/frontend-nanodegree-arcade-game/).
 
 ## Rules
 
