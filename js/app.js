@@ -1,47 +1,55 @@
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
-  // Determines enemy's x and y axis, speed and image
     this.x = x;
     this.y = y;
     this.speed = speed;
+
+    // The image/sprite for our enemies, this uses
+    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
 };
 
-// Updates enemy's position
+// Update the enemy's position, required method for game
+// Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-// Multiplies the speed by the dt parameter on the x axis
-    this.x =+ this.speed * dt;
-// Ensures enemies reappear off canvas randomly at random speeds
+    // You should multiply any movement by the dt parameter
+    // which will ensure the game runs at the same speed for
+    // all computers.
+    this.x += this.speed * dt;
+
+    // when off canvas, reset position of enemy to move across again
     if (this.x > 550) {
-      this.x = -100;
-      this.speed = 100 + Math.floor(Math.random() * 512);
+        this.x = -100;
+        this.speed = 100 + Math.floor(Math.random() * 512);
     }
-// Defines collision between enemy and player
+
+    // Check for collision between player and enemies
     if (player.x < this.x + 60 &&
         player.x + 37 > this.x &&
         player.y < this.y + 25 &&
         30 + player.y > this.y) {
-// In case of collision, player gets reset to starting position
         player.x = 200;
         player.y = 380;
     }
 };
 
-// Renders enemy into game
+// Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Determines player's x and y axis and image
-var Player = function (x, y, speed) {
+// Now write your own player class
+// This class requires an update(), render() and
+// a handleInput() method.
+var Player = function(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
-    this.player = 'images/char-princess-girl.png'
-}
+    this.sprite = 'images/char-princess-girl.png';
+};
 
 Player.prototype.update = function() {
-    // Prevents player from moving beyond canvas wall boundaries
+    // Prevent player from moving beyond canvas wall boundaries
     if (this.y > 380) {
         this.y = 380;
     }
@@ -54,19 +62,17 @@ Player.prototype.update = function() {
         this.x = 0;
     }
 
-    // Checks for player reaching top of canvas and winning the game
+    // Check for player reaching top of canvas and winning the game
     if (this.y < 0) {
         this.x = 200;
         this.y = 380;
     }
 };
 
-// Renders player into game
 Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.player), this.x, this.y);
-}
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
 
-// Allows for use of arrow keys
 Player.prototype.handleInput = function(keyPress) {
     switch (keyPress) {
         case 'left':
@@ -84,21 +90,23 @@ Player.prototype.handleInput = function(keyPress) {
     }
 };
 
-// Array for all enemies
+// Now instantiate your objects.
+// Place all enemy objects in an array called allEnemies
+// Place the player object in a variable called player
 var allEnemies = [];
 
-// Location of the 3 enemies on the y axis
-var enemyLocation = [60, 140, 220];
+// Position "y" where the enemies will are created
+var enemyPosition = [60, 140, 220];
+var player = new Player(200, 380, 50);
+var enemy;
 
-enemyLocation.forEach(function(locationY) {
-  enemy = new Enemy(0, locationY, 200);
-  allEnemies.push(enemy);
+enemyPosition.forEach(function(posY) {
+    enemy = new Enemy(0, posY, 100 + Math.floor(Math.random() * 512));
+    allEnemies.push(enemy);
 });
 
-// Starting location of player
-var player = new Player(200, 380, 50);
-
-// Key press listener
+// This listens for key presses and sends the keys to your
+// Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
