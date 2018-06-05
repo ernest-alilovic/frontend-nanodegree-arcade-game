@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function(x, y, speed) {
   // Determines enemy's x and y axis, speed and image
     this.x = x;
     this.y = y;
@@ -20,10 +20,10 @@ Enemy.prototype.update = function(dt) {
     if (player.x < this.x + 60 &&
         player.x + 37 > this.x &&
         player.y < this.y + 25 &&
-        60 + player.y > this.y) {
+        30 + player.y > this.y) {
 // In case of collision, player gets reset to starting position
-        player.x = 202;
-        player.y = 405,
+        player.x = 200;
+        player.y = 380;
     }
 };
 
@@ -33,9 +33,10 @@ Enemy.prototype.render = function() {
 };
 
 // Determines player's x and y axis and image
-var Player = function (x, y) {
+var Player = function (x, y, speed) {
     this.x = x;
     this.y = y;
+    this.speed = speed;
     this.player = 'images/char-princess-girl.png'
 }
 
@@ -66,7 +67,7 @@ Player.prototype.render = function() {
 }
 
 // Allows for use of arrow keys
-Player.prototype.handleInput = function (keyPress) {
+Player.prototype.handleInput = function(keyPress) {
     switch (keyPress) {
         case 'left':
             this.x -= this.speed + 50;
@@ -87,7 +88,7 @@ Player.prototype.handleInput = function (keyPress) {
 var allEnemies = [];
 
 // Location of the 3 enemies on the y axis
-var enemyLocation = [63, 147, 230];
+var enemyLocation = [60, 140, 220];
 
 enemyLocation.forEach(function(locationY) {
   enemy = new Enemy(0, locationY, 200);
@@ -95,7 +96,7 @@ enemyLocation.forEach(function(locationY) {
 });
 
 // Starting location of player
-var player = new Player(202, 405);
+var player = new Player(200, 380, 50);
 
 // Key press listener
 document.addEventListener('keyup', function(e) {
