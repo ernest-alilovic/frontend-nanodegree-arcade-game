@@ -8,7 +8,7 @@ To start playing just click [here](http://htmlpreview.github.io/?https://github.
 
 ## Rules
 
-The goal is get past the cockroaches to the water.
+The goal is to get past the cockroaches to the water!
 
 1. Use the arrow keys on your keyboard to move upwards while avoiding the cockroaches.
 
