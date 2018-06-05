@@ -12,14 +12,14 @@ Enemy.prototype.update = function(dt) {
 // Multiplies the speed by the dt parameter on the x axis
     this.x =+ this.speed * dt;
 // Ensures enemies reappear off canvas randomly at random speeds
-    if (this.x > 510) {
-      this.x = -50;
-      this.speed = 100 + Math.floor(Math.random() * 300);
+    if (this.x > 550) {
+      this.x = -100;
+      this.speed = 100 + Math.floor(Math.random() * 512);
     }
 // Defines collision between enemy and player
-    if (player.x < this.x + 80 &&
-        player.x + 80 > this.x &&
-        player.y < this.y + 60 &&
+    if (player.x < this.x + 60 &&
+        player.x + 37 > this.x &&
+        player.y < this.y + 25 &&
         60 + player.y > this.y) {
 // In case of collision, player gets reset to starting position
         player.x = 202;
@@ -39,9 +39,26 @@ var Player = function (x, y) {
     this.player = 'images/char-princess-girl.png'
 }
 
-Player.prototype.update = function(dt) {
+Player.prototype.update = function() {
+    // Prevents player from moving beyond canvas wall boundaries
+    if (this.y > 380) {
+        this.y = 380;
+    }
 
-}
+    if (this.x > 400) {
+        this.x = 400;
+    }
+
+    if (this.x < 0) {
+        this.x = 0;
+    }
+
+    // Checks for player reaching top of canvas and winning the game
+    if (this.y < 0) {
+        this.x = 200;
+        this.y = 380;
+    }
+};
 
 // Renders player into game
 Player.prototype.render = function() {
@@ -50,25 +67,21 @@ Player.prototype.render = function() {
 
 // Allows for use of arrow keys
 Player.prototype.handleInput = function (keyPress) {
-    if (keyPress == 'left' && this.x > 0) {
-      this.x -= 102;
+    switch (keyPress) {
+        case 'left':
+            this.x -= this.speed + 50;
+            break;
+        case 'up':
+            this.y -= this.speed + 30;
+            break;
+        case 'right':
+            this.x += this.speed + 50;
+            break;
+        case 'down':
+            this.y += this.speed + 30;
+            break;
     }
-    if (keyPress == 'right' && this.x < 405) {
-      this.x += 102;
-    }
-    if (keyPress == 'up' && this.y > 0) {
-      this.y -= 83;
-    }
-    if (keyPress == 'down' && this.y < 405) {
-      this.y += 83;
-    }
-    if (this.y < 0) {
-      setTimeout(function() {
-        player.x = 202;
-        player.y = 405;
-      }, 500);
-    }
-}
+};
 
 // Array for all enemies
 var allEnemies = [];
